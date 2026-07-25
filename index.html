@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function() {
+  var stored = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme = stored || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Kartik Bahuguna</title>
+<meta name="description" content="Kartik Bahuguna">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #16181d;
+  --muted: #767676;
+  --accent: #8c6fef;
+  --rule: #ececec;
+  --ring: #8c6fef;
+  --max-w: 672px;
+}
+
+html[data-theme="dark"] {
+  --bg: #15171a;
+  --text: #f2f2f2;
+  --muted: #93958f;
+  --accent: #a68cff;
+  --rule: #2b2d31;
+  --ring: #a68cff;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body, .theme-toggle svg { transition: none; }
+}
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 4rem 1.5rem 4rem;
+}
+
+.header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-title {
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.site-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  margin-top: 0.2rem;
+}
+
+.theme-toggle:hover { color: var(--accent); }
+
+.theme-toggle svg { width: 24px; height: 24px; }
+
+.theme-toggle {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.icon-moon, .icon-sun {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.icon-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+html[data-theme="dark"] .icon-moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+html[data-theme="dark"] .icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-moon, .icon-sun { transition: none; }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.15rem;
+}
+
+nav.site-nav {
+  display: flex;
+  gap: 1.1rem;
+}
+
+nav.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+nav.site-nav a.active { color: var(--text); }
+
+nav.site-nav a:hover { color: var(--text); }
+
+.socials {
+  display: flex;
+  gap: 1.35rem;
+}
+
+.socials a {
+  color: #3d3f44;
+  display: flex;
+}
+
+html[data-theme="dark"] .socials a { color: #c7c8cc; }
+
+.socials a:hover { color: var(--accent); }
+.socials svg { width: 25px; height: 25px; }
+
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1.75rem 0 3.5rem;
+}
+
+section.posts { margin-bottom: 1rem; }
+
+.entry {
+  margin-bottom: 2.75rem;
+}
+
+.entry:last-child { margin-bottom: 0; }
+
+.entry a.title {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.entry a.title:hover { color: var(--accent); }
+
+.entry .date {
+  display: block;
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-top: 0.35rem;
+}
+
+.entry .desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+/* About page */
+.about-photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 4px solid var(--ring);
+  object-fit: cover;
+  display: block;
+  margin: 1rem auto 2.75rem;
+}
+
+.about-photo.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rule);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+article.page p {
+  margin: 0 0 1.4rem;
+  color: var(--text);
+}
+
+article.page a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+article.page a:hover { text-decoration: underline; }
+
+footer.site-footer {
+  margin-top: 4.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+footer.site-footer a { color: var(--muted); text-decoration: none; }
+footer.site-footer a:hover { color: var(--accent); }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Post page */
+.back-link {
+  display: inline-block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+  margin-bottom: 2rem;
+}
+
+.back-link:hover { color: var(--accent); }
+
+article.post h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+article.post .post-date {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 2.25rem;
+  display: block;
+}
+
+article.post p {
+  margin: 0 0 1.3rem;
+  color: var(--text);
+}
+
+article.post h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 2.25rem 0 1rem;
+}
+
+article.post a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+article.post a:hover { text-decoration: underline; }
+
+article.post code {
+  background: var(--rule);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.88em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+article.post pre {
+  background: var(--rule);
+  padding: 1rem 1.1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0 0 1.4rem;
+}
+
+article.post pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+article.post ul, article.post ol {
+  margin: 0 0 1.3rem;
+  padding-left: 1.3rem;
+}
+
+article.post li { margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="header-row">
+      <h1 class="site-title"><a href="index.html">Kartik Bahuguna</a></h1>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <span class="icon-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-sun"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4.6"></circle><circle cx="21" cy="12" r="1.4"></circle><circle cx="18.36" cy="5.64" r="1.4"></circle><circle cx="12" cy="3" r="1.4"></circle><circle cx="5.64" cy="5.64" r="1.4"></circle><circle cx="3" cy="12" r="1.4"></circle><circle cx="5.64" cy="18.36" r="1.4"></circle><circle cx="12" cy="21" r="1.4"></circle><circle cx="18.36" cy="18.36" r="1.4"></circle></svg></span>
+      </button>
+    </div>
+    <div class="nav-row">
+      <nav class="site-nav">
+        <a href="index.html" class="active">Posts</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+      </nav>
+      <div class="socials">
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.08.78 2.17 0 1.56-.01 2.82-.01 3.2 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"></path></svg></a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a>
+        <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.9h3.68l-8.04 9.19L24 22.1h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.9h7.6l5.24 6.93 6.06-6.93zm-1.3 18h2.04L6.5 3.98H4.31L17.6 19.9z"></path></svg></a>
+      </div>
+    </div>
+    <hr class="rule">
+  </header>
+
+  <section class="posts">
+    <div class="entry">
+      <a class="title" href="post-rate-limit-bypass.html">Bypassing a Weak Rate Limit on a Password Reset Flow</a>
+      <span class="date">Jul 20, 2026</span>
+    </div>
+    <div class="entry">
+      <a class="title" href="post-idor-side-project.html">Finding an IDOR in a Weekend Side Project</a>
+      <span class="date">Jun 05, 2026</span>
+    </div>
+    <div class="entry">
+      <a class="title" href="post-home-lab.html">Setting Up a Home Lab for Web Security Testing</a>
+      <span class="date">Apr 12, 2026</span>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>© 2026 Kartik Bahuguna</span>
+    
+  </footer>
+</div>
+<script>function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function applyTheme() {
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+
+  if (reduceMotion || !document.startViewTransition) {
+    applyTheme();
+    return;
+  }
+
+  var x = window.innerWidth * 0.02;
+  var y = window.innerHeight * 0.98;
+  var endRadius = Math.hypot(
+    Math.max(x, window.innerWidth - x),
+    Math.max(y, window.innerHeight - y)
+  );
+
+  var transition = document.startViewTransition(applyTheme);
+
+  transition.ready.then(function() {
+    document.documentElement.animate(
+      {
+        clipPath: [
+          'circle(0px at ' + x + 'px ' + y + 'px)',
+          'circle(' + endRadius + 'px at ' + x + 'px ' + y + 'px)'
+        ]
+      },
+      {
+        duration: 700,
+        easing: 'ease-in-out',
+        pseudoElement: '::view-transition-new(root)'
+      }
+    );
+  });
+}</script>
+</body>
+</html>
